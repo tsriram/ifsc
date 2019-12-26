@@ -10,8 +10,8 @@ const getSlug = (bank, branch, city, state) => {
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type === "IfscCsv") {
     const { createNodeField } = actions;
-    const { BANK, BRANCH, CITY, STATE } = node;
-    const slug = getSlug(BANK, BRANCH, CITY, STATE);
+    const { bank, branch, city, state } = node;
+    const slug = getSlug(bank, branch, city, state);
 
     createNodeField({
       node,
