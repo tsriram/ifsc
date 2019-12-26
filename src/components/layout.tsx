@@ -5,9 +5,7 @@ interface LayoutProps {
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => (
-  <div style={{ margin: `3rem auto`, maxWidth: 650, padding: `0 1rem` }}>
-    {children}
-  </div>
+  <main style={{ margin: `3rem auto`, padding: `0 1rem` }}>{children}</main>
 );
 
 export default Layout;
