@@ -1,3 +1,12 @@
-import React from "react"
+import Layout from "../components/layout";
+import React from "react";
 
-export default () => <div>Hello world!</div>
+const Index: React.FC<{}> = () => {
+  return (
+    <Layout>
+      <div>Hello world!</div>
+    </Layout>
+  );
+};
+
+export default Index;
