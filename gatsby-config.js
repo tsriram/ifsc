@@ -14,6 +14,7 @@ module.exports = {
         path: `${__dirname}/src/data/`
       }
     },
-    `gatsby-transformer-csv`
+    `gatsby-transformer-csv`,
+    `gatsby-plugin-sass`
   ]
 };
