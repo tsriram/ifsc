@@ -17,6 +17,7 @@
     "bulma": "^0.8.0",
     "gatsby": "^2.18.12",
     "gatsby-plugin-sass": "^2.1.26",
+    "gatsby-plugin-schema-snapshot": "^1.0.0",
     "gatsby-plugin-typescript": "^2.1.23",
     "gatsby-source-filesystem": "^2.1.43",
     "gatsby-transformer-csv": "^2.1.21",

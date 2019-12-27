@@ -15,6 +15,16 @@ module.exports = {
       }
     },
     `gatsby-transformer-csv`,
-    `gatsby-plugin-sass`
+    `gatsby-plugin-sass`,
+    {
+      resolve: `gatsby-plugin-schema-snapshot`,
+      options: {
+        path: `schema.gql`,
+        include: {
+          plugins: [`gatsby-transformer-csv`]
+        },
+        update: process.env.GATSBY_UPDATE_SCHEMA_SNAPSHOT
+      }
+    }
   ]
 };
