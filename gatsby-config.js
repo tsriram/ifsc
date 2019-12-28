@@ -11,7 +11,10 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `data`,
-        path: `${__dirname}/src/data/`
+        path:
+          process.env.gatsby_executing_command === "develop"
+            ? `${__dirname}/src/data/develop`
+            : `${__dirname}/src/data/build`
       }
     },
     `gatsby-transformer-csv`,
