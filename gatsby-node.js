@@ -1,22 +1,46 @@
 const slugify = text => text.replace(/ /g, "-").toLowerCase();
 const path = require("path");
 
-const getSlug = (bank, branch, city, state) => {
-  return `${slugify(bank)}-${slugify(branch)}-${slugify(city)}-${slugify(
-    state
-  )}-ifsc`;
-};
-
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type === "IfscCsv") {
     const { createNodeField } = actions;
     const { bank, branch, city, state } = node;
-    const slug = getSlug(bank, branch, city, state);
+
+    const bankSlug = slugify(bank);
+    const stateSlug = slugify(state);
+    const citySlug = slugify(city);
+    const branchSlug = slugify(branch);
+
+    const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`;
+
+    createNodeField({
+      node,
+      name: `bankSlug`,
+      value: bankSlug
+    });
+
+    createNodeField({
+      node,
+      name: `stateSlug`,
+      value: stateSlug
+    });
+
+    createNodeField({
+      node,
+      name: `citySlug`,
+      value: citySlug
+    });
 
     createNodeField({
       node,
       name: `slug`,
       value: slug
+    });
+
+    createNodeField({
+      node,
+      name: `branchSlug`,
+      value: branchSlug
     });
   }
 };

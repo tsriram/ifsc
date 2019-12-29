@@ -1,4 +1,4 @@
-### Type definitions saved at 2019-12-27T11:59:30.553Z ###
+### Type definitions saved at 2019-12-29T01:24:15.747Z ###
 
 type IfscCsv implements Node @derivedTypes @dontInfer {
   bank: String
@@ -18,5 +18,9 @@ type IfscCsv implements Node @derivedTypes @dontInfer {
 }
 
 type IfscCsvFields {
+  bankSlug: String
+  stateSlug: String
+  citySlug: String
   slug: String
+  branchSlug: String
 }
