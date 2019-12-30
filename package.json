@@ -5,6 +5,8 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
+    "split:develop": "./node_modules/.bin/csvsplit -c 1 -o ./src/data/develop ./src/data/original/develop.csv",
+    "split:build": "./node_modules/.bin/csvsplit -c 1 -o ./src/data/build ./src/data/original/build.csv",
     "build": "gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",

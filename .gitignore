@@ -67,3 +67,8 @@ yarn-error.log
 .pnp.js
 # Yarn Integrity file
 .yarn-integrity
+
+
+# split data files
+src/data/develop
+src/data/build
