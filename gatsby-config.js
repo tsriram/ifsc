@@ -17,7 +17,12 @@ module.exports = {
             : `${__dirname}/src/data/build`
       }
     },
-    `gatsby-transformer-csv`,
+    {
+      resolve: `gatsby-transformer-csv`,
+      options: {
+        typeName: "IfscCsv"
+      }
+    },
     `gatsby-plugin-sass`,
     {
       resolve: `gatsby-plugin-schema-snapshot`,
