@@ -46,23 +46,3 @@ exports.createPages = async ({ graphql, actions }) => {
     });
   });
 };
-
-exports.createSchemaCustomization = ({ actions }) => {
-  actions.createTypes(`
-    type IfscCsv implements Node @dontInfer {
-      bank: String!
-      ifsc: String!
-      branch: String!
-      centre: String!
-      district: String!
-      state: String!
-      address: String!
-      contact: String!
-      imps: String!
-      rtgs: String!
-      city: String!
-      neft: String!
-      micr: String!
-    }
-  `);
-};
