@@ -23,16 +23,16 @@ module.exports = {
         typeName: "IfscCsv"
       }
     },
-    `gatsby-plugin-sass`,
-    {
-      resolve: `gatsby-plugin-schema-snapshot`,
-      options: {
-        path: `schema.gql`,
-        include: {
-          plugins: [`gatsby-transformer-csv`]
-        },
-        update: process.env.GATSBY_UPDATE_SCHEMA_SNAPSHOT
-      }
-    }
+    `gatsby-plugin-sass`
+    // {
+    //   resolve: `gatsby-plugin-schema-snapshot`,
+    //   options: {
+    //     path: `schema.gql`,
+    //     include: {
+    //       plugins: [`gatsby-transformer-csv`]
+    //     },
+    //     update: process.env.GATSBY_UPDATE_SCHEMA_SNAPSHOT
+    //   }
+    // }
   ]
 };

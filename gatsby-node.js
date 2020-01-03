@@ -15,32 +15,8 @@ exports.onCreateNode = ({ node, actions }) => {
 
     createNodeField({
       node,
-      name: `bankSlug`,
-      value: bankSlug
-    });
-
-    createNodeField({
-      node,
-      name: `stateSlug`,
-      value: stateSlug
-    });
-
-    createNodeField({
-      node,
-      name: `citySlug`,
-      value: citySlug
-    });
-
-    createNodeField({
-      node,
       name: `slug`,
       value: slug
-    });
-
-    createNodeField({
-      node,
-      name: `branchSlug`,
-      value: branchSlug
     });
   }
 };
@@ -69,4 +45,24 @@ exports.createPages = async ({ graphql, actions }) => {
       }
     });
   });
+};
+
+exports.createSchemaCustomization = ({ actions }) => {
+  actions.createTypes(`
+    type IfscCsv implements Node @dontInfer {
+      bank: String!
+      ifsc: String!
+      branch: String!
+      centre: String!
+      district: String!
+      state: String!
+      address: String!
+      contact: String!
+      imps: String!
+      rtgs: String!
+      city: String!
+      neft: String!
+      micr: String!
+    }
+  `);
 };
