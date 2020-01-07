@@ -94,8 +94,8 @@ const IFSC: React.FC<IFSCPageProps> = ({ data }) => {
 };
 
 export const query = graphql`
-  query($slug: String!) {
-    allIfscCsv(filter: { fields: { slug: { eq: $slug } } }) {
+  query($id: String!) {
+    allIfscCsv(filter: { id: { eq: $id } }) {
       edges {
         node {
           ifsc

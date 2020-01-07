@@ -28,6 +28,7 @@ exports.createPages = async ({ graphql, actions }) => {
       allIfscCsv {
         edges {
           node {
+            id
             fields {
               slug
             }
@@ -41,7 +42,7 @@ exports.createPages = async ({ graphql, actions }) => {
       path: node.fields.slug,
       component: path.resolve(`./src/templates/ifsc.tsx`),
       context: {
-        slug: node.fields.slug
+        id: node.id
       }
     });
   });
