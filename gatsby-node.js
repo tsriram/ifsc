@@ -11,7 +11,10 @@ exports.onCreateNode = ({ node, actions }) => {
     const citySlug = slugify(city);
     const branchSlug = slugify(branch);
 
-    const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`;
+    const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`.replace(
+      /\./g,
+      ""
+    );
 
     createNodeField({
       node,
