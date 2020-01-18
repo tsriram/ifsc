@@ -17,7 +17,7 @@
   },
   "dependencies": {
     "bulma": "^0.8.0",
-    "gatsby": "^2.18.23",
+    "gatsby": "^2.18.25",
     "gatsby-plugin-sass": "^2.1.26",
     "gatsby-plugin-schema-snapshot": "^1.0.0",
     "gatsby-plugin-typescript": "^2.1.23",
