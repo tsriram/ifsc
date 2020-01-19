@@ -1,0 +1,17 @@
+{
+  "JIOP0000001": {
+    "IFSC": "JIOP0000001",
+    "BRANCH": "RTGS-HO",
+    "CENTRE": "NAVI MUMBAI",
+    "DISTRICT": "NAVI MUMBAI",
+    "STATE": "MAHARASHTRA",
+    "ADDRESS": "RELIANCE CORPORATE PARK, GHANSOLI, NAVI MUMBAI, MAHARASHTRA, INDIA",
+    "CONTACT": null,
+    "BANK": "JIO PAYMENTS BANK LIMITED",
+    "RTGS": true,
+    "CITY": "MUMBAI",
+    "NEFT": true,
+    "IMPS": true,
+    "MICR": null
+  }
+}
