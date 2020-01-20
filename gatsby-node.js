@@ -1,10 +1,10 @@
-const slugify = text => text.replace(/ /g, "-").toLowerCase();
+const slugify = text => text && text.replace(/ /g, "-").toLowerCase();
 const path = require("path");
 
 exports.onCreateNode = ({ node, actions }) => {
-  if (node.internal.type === "IfscCsv") {
+  if (node.internal.type === "IfscJson") {
     const { createNodeField } = actions;
-    const { bank, branch, city, state } = node;
+    const { BANK: bank, BRANCH: branch, CITY: city, STATE: state } = node;
 
     const bankSlug = slugify(bank);
     const stateSlug = slugify(state);
@@ -32,7 +32,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   const { createPage } = actions;
   const result = await graphql(`
     query {
-      allIfscCsv {
+      allIfscJson {
         edges {
           node {
             id
@@ -50,13 +50,13 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
   console.time("(ifsc) created pages");
 
   progress.start();
-  progress.total = result.data.allIfscCsv.edges.length - 1;
+  progress.total = result.data.allIfscJson.edges.length - 1;
   let start = Date.now();
   progress.setStatus(
-    "Calling createPage for " + result.data.allIfscCsv.edges.length + " pages"
+    "Calling createPage for " + result.data.allIfscJson.edges.length + " pages"
   );
 
-  result.data.allIfscCsv.edges.forEach(({ node }) => {
+  result.data.allIfscJson.edges.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/ifsc.tsx`),
@@ -69,9 +69,9 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
 
   progress.setStatus(
     "Called createPage for " +
-      (result.data.allIfscCsv.edges.length - 1) +
+      (result.data.allIfscJson.edges.length - 1) +
       " pages at " +
-      (result.data.allIfscCsv.edges.length - 1) /
+      (result.data.allIfscJson.edges.length - 1) /
         ((Date.now() - start) / 1000) +
       " pages/s"
   );
