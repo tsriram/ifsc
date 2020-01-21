@@ -1,20 +1,22 @@
-const slugify = text => text && text.replace(/ /g, "-").toLowerCase();
+const slugify = require("slugify");
 const path = require("path");
+
+const slugifyOptions = {
+  lower: true,
+  remove: /[*+~.()'"!:@]/g
+};
 
 exports.onCreateNode = ({ node, actions }) => {
   if (node.internal.type === "IfscJson") {
     const { createNodeField } = actions;
     const { BANK: bank, BRANCH: branch, CITY: city, STATE: state } = node;
 
-    const bankSlug = slugify(bank);
-    const stateSlug = slugify(state);
-    const citySlug = slugify(city);
-    const branchSlug = slugify(branch);
+    const bankSlug = slugify(bank, slugifyOptions);
+    const stateSlug = slugify(state, slugifyOptions);
+    const citySlug = slugify(city, slugifyOptions);
+    const branchSlug = slugify(branch, slugifyOptions);
 
-    const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`.replace(
-      /\./g,
-      ""
-    );
+    const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`;
 
     createNodeField({
       node,
