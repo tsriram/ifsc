@@ -11,12 +11,26 @@ exports.onCreateNode = ({ node, actions }) => {
     const { createNodeField } = actions;
     const { BANK: bank, BRANCH: branch, CITY: city, STATE: state } = node;
 
-    const bankSlug = slugify(bank, slugifyOptions);
-    const stateSlug = slugify(state, slugifyOptions);
-    const citySlug = slugify(city, slugifyOptions);
-    const branchSlug = slugify(branch, slugifyOptions);
+    const bankSlug = bank && slugify(bank, slugifyOptions);
+    const stateSlug = state && slugify(state, slugifyOptions);
+    const citySlug = city && slugify(city, slugifyOptions);
+    const branchSlug = branch && slugify(branch, slugifyOptions);
 
-    const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`;
+    // const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`;
+
+    let slug = "";
+    if (bankSlug) {
+      slug += bankSlug;
+    }
+    if (stateSlug) {
+      slug += `/${stateSlug}`;
+    }
+    if (citySlug) {
+      slug += `/${citySlug}`;
+    }
+    if (branchSlug) {
+      slug += `/${branchSlug}-branch`;
+    }
 
     createNodeField({
       node,
