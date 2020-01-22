@@ -1,0 +1,16 @@
+{
+  "KCBL0000102": {
+    "IFSC": "KCBL0000102",
+    "BRANCH": "SURAT",
+    "CENTRE": "SURAT",
+    "DISTRICT": "SURAT",
+    "STATE": "GUJARAT",
+    "ADDRESS": "U1-U2, METRO TOWER, RING ROAD, SURAT - 395 003",
+    "CONTACT": null,
+    "BANK": "KAPOL CO-OP BANK LTD",
+    "RTGS": true,
+    "NEFT": false,
+    "IMPS": true,
+    "MICR": null
+  }
+}

@@ -3,15 +3,15 @@ import { graphql } from "gatsby";
 import React from "react";
 
 interface IFSCProps {
-  readonly ifsc: string;
-  readonly bank: string;
-  readonly branch: string;
-  readonly city: string;
-  readonly state: string;
-  readonly centre: string;
-  readonly address: string;
-  readonly contact: string;
-  readonly micr: string;
+  readonly IFSC: string;
+  readonly BANK: string;
+  readonly BRANCH: string;
+  readonly CITY: string;
+  readonly STATE: string;
+  readonly CENTRE: string;
+  readonly ADDRESS: string;
+  readonly CONTACT: string;
+  readonly MICR: string;
 }
 
 interface Node {
@@ -20,25 +20,25 @@ interface Node {
 
 interface IFSCPageProps {
   readonly data: {
-    readonly allIfscCsv: {
+    readonly allIfscJson: {
       readonly edges: ReadonlyArray<Node>;
     };
   };
 }
 
 const IFSC: React.FC<IFSCPageProps> = ({ data }) => {
-  const { allIfscCsv } = data;
-  const node = allIfscCsv.edges[0].node;
+  const { allIfscJson } = data;
+  const node = allIfscJson.edges[0].node;
   const {
-    ifsc,
-    bank,
-    branch,
-    city,
-    state,
-    centre,
-    address,
-    contact,
-    micr
+    IFSC: ifsc,
+    BANK: bank,
+    BRANCH: branch,
+    CITY: city,
+    STATE: state,
+    CENTRE: centre,
+    ADDRESS: address,
+    CONTACT: contact,
+    MICR: micr
   } = node;
   return (
     <Layout>
@@ -95,18 +95,18 @@ const IFSC: React.FC<IFSCPageProps> = ({ data }) => {
 
 export const query = graphql`
   query($id: String!) {
-    allIfscCsv(filter: { id: { eq: $id } }) {
+    allIfscJson(filter: { id: { eq: $id } }) {
       edges {
         node {
-          ifsc
-          bank
-          branch
-          city
-          state
-          centre
-          address
-          contact
-          micr
+          IFSC
+          BANK
+          BRANCH
+          CITY
+          STATE
+          CENTRE
+          ADDRESS
+          CONTACT
+          MICR
         }
       }
     }

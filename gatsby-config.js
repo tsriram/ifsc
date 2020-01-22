@@ -18,9 +18,9 @@ module.exports = {
       }
     },
     {
-      resolve: `gatsby-transformer-csv`,
+      resolve: `gatsby-transformer-json`,
       options: {
-        typeName: "IfscCsv"
+        typeName: "IfscJson"
       }
     },
     `gatsby-plugin-sass`,
@@ -29,7 +29,7 @@ module.exports = {
       options: {
         path: `schema.gql`,
         include: {
-          plugins: [`gatsby-transformer-csv`]
+          plugins: [`gatsby-transformer-json`]
         },
         update: process.env.GATSBY_UPDATE_SCHEMA_SNAPSHOT
       }
