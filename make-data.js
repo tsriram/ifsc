@@ -3,12 +3,8 @@ const path = require("path");
 const fs = require("fs");
 
 const originalDataPath = path.join(__dirname, "src", "data", "original");
-
 const developDataPath = path.join(__dirname, "src", "data", "develop");
-fs.mkdirSync(developDataPath);
-
 const buildDataPath = path.join(__dirname, "src", "data", "build");
-fs.mkdirSync(buildDataPath);
 
 try {
   const files = fs.readdirSync(originalDataPath);

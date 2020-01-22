@@ -5,15 +5,14 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "split:develop": "mkdirp ./src/data/develop && ./node_modules/.bin/csvsplit -c 1 -o ./src/data/develop ./src/data/original/develop.csv",
-    "split:build": "mkdirp src/data/build && ./node_modules/.bin/csvsplit -c 1 -o ./src/data/build ./src/data/original/build.csv",
-    "build": "gatsby build",
+    "build": "npm run make-data && gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
     "serve": "gatsby serve",
     "clean": "gatsby clean",
-    "test": "echo \"Write tests! -> https://gatsby.dev/unit-testing\" && exit 1"
+    "make-data": "npm run clean-data && node make-data",
+    "clean-data": "rimraf src/data/develop && rimraf src/data/build && mkdirp src/data/develop && mkdirp src/data/build"
   },
   "dependencies": {
     "bulma": "^0.8.0",
@@ -24,9 +23,11 @@
     "gatsby-source-filesystem": "^2.1.43",
     "gatsby-transformer-json": "^2.2.25",
     "lodash": "^4.17.15",
+    "mkdirp": "^0.5.1",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
     "react-dom": "^16.12.0",
+    "rimraf": "^3.0.0",
     "slugify": "^1.3.6"
   },
   "devDependencies": {
