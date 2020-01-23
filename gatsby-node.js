@@ -3,7 +3,7 @@ const path = require("path");
 
 const slugifyOptions = {
   lower: true,
-  remove: /[^a-zA-Z\d]/g
+  remove: /[^a-zA-Z\d\s]/g
 };
 
 exports.onCreateNode = ({ node, actions }) => {
@@ -34,6 +34,12 @@ exports.onCreateNode = ({ node, actions }) => {
       node,
       name: `slug`,
       value: slug
+    });
+
+    createNodeField({
+      node,
+      name: `bankSlug`,
+      value: bankSlug
     });
   }
 };
