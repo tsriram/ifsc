@@ -21,7 +21,11 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           </Link>
         </div>
       </nav>
-      <main>{children}</main>
+      <main>
+        <section className="section">
+          <div className="container">{children}</div>
+        </section>
+      </main>
     </div>
   );
 };
