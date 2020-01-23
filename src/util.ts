@@ -1,5 +1,6 @@
+// TODO: This is the same code we use in gatsby-node.js to create slug, but that's JS
+// Find a way to keep this in a single place
 const slugifyLib = require("slugify");
-const path = require("path");
 
 const slugifyOptions = {
   lower: true,
