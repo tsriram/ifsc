@@ -19,7 +19,7 @@ try {
     const contentArray = flatMap(jsonContent);
 
     fs.writeFileSync(buildFilePath, JSON.stringify(contentArray));
-    fs.writeFileSync(developFilePath, JSON.stringify(contentArray.slice(0, 1)));
+    fs.writeFileSync(developFilePath, JSON.stringify(contentArray.slice(0, 5)));
   }
 } catch (error) {
   console.error(`Error while reading files: ${error}`);
