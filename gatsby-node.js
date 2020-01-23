@@ -3,7 +3,7 @@ const path = require("path");
 
 const slugifyOptions = {
   lower: true,
-  remove: /[*+~.()'"!:@#\,]/g
+  remove: /[^a-zA-Z\d]/g
 };
 
 exports.onCreateNode = ({ node, actions }) => {
