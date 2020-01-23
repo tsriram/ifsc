@@ -33,6 +33,12 @@ module.exports = {
         },
         update: process.env.GATSBY_UPDATE_SCHEMA_SNAPSHOT
       }
+    },
+    {
+      resolve: `gatsby-plugin-purgecss`,
+      options: {
+        develop: true
+      }
     }
   ]
 };

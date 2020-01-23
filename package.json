@@ -5,7 +5,7 @@
   "version": "0.1.0",
   "license": "MIT",
   "scripts": {
-    "build": "npm run make-data && gatsby build",
+    "build": "npm run make-data && NODE_OPTIONS=\"--max-old-space-size=4096\" gatsby build",
     "develop": "gatsby develop",
     "format": "prettier --write \"**/*.{js,jsx,json,md}\"",
     "start": "npm run develop",
@@ -17,6 +17,7 @@
   "dependencies": {
     "bulma": "^0.8.0",
     "gatsby": "^2.18.25",
+    "gatsby-plugin-purgecss": "^4.0.1",
     "gatsby-plugin-sass": "^2.1.26",
     "gatsby-plugin-schema-snapshot": "^1.0.0",
     "gatsby-plugin-typescript": "^2.1.23",
