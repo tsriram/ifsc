@@ -44,13 +44,36 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 };
 
-exports.createPages = async ({ graphql, actions, reporter }) => {
-  const progress = reporter.createProgress(`ifsc/gatsby-node.js`);
-  console.time("(ifsc) total exports.createPages");
-  console.time("(ifsc) initial graphql query");
-  progress.setStatus("initial graphl query");
+exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
-  const result = await graphql(`
+
+  // create pages to list states for each bank
+  const bankPages = await graphql(`
+    query {
+      allIfscJson {
+        edges {
+          node {
+            fields {
+              bankSlug
+            }
+          }
+        }
+      }
+    }
+  `);
+
+  bankPages.data.allIfscJson.edges.forEach(({ node }) => {
+    createPage({
+      path: node.fields.bankSlug,
+      component: path.resolve(`./src/templates/bank-page.tsx`),
+      context: {
+        bankSlug: node.fields.bankSlug
+      }
+    });
+  });
+
+  // create pages for all individual IFSC
+  const allIfsc = await graphql(`
     query {
       allIfscJson {
         edges {
@@ -65,18 +88,7 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
     }
   `);
 
-  console.timeEnd("(ifsc) initial graphql query");
-
-  console.time("(ifsc) created pages");
-
-  progress.start();
-  progress.total = result.data.allIfscJson.edges.length - 1;
-  let start = Date.now();
-  progress.setStatus(
-    "Calling createPage for " + result.data.allIfscJson.edges.length + " pages"
-  );
-
-  result.data.allIfscJson.edges.forEach(({ node }) => {
+  allIfsc.data.allIfscJson.edges.forEach(({ node }) => {
     createPage({
       path: node.fields.slug,
       component: path.resolve(`./src/templates/ifsc.tsx`),
@@ -84,19 +96,5 @@ exports.createPages = async ({ graphql, actions, reporter }) => {
         id: node.id
       }
     });
-    progress.tick(1);
   });
-
-  progress.setStatus(
-    "Called createPage for " +
-      (result.data.allIfscJson.edges.length - 1) +
-      " pages at " +
-      (result.data.allIfscJson.edges.length - 1) /
-        ((Date.now() - start) / 1000) +
-      " pages/s"
-  );
-  progress.done();
-  console.timeEnd("(ifsc) created pages");
-  console.timeEnd("(ifsc) total exports.createPages");
-  progress.setStatus("createPages finished");
 };
