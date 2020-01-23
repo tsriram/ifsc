@@ -13,33 +13,32 @@ interface Node {
 interface BankPageProps {
   readonly data: {
     readonly allIfscJson: {
-      readonly states: ReadonlyArray<string>;
-      readonly banks: ReadonlyArray<string>;
+      readonly cities: ReadonlyArray<string>;
     };
   };
 }
 
 const IFSC: React.FC<BankPageProps> = ({ data }) => {
-  const { states, banks } = data.allIfscJson;
-  const bank = banks[0];
-  const bankPageSlug = `/${slugify(bank)}`;
+  const { cities } = data.allIfscJson;
+  // const bank = banks[0];
+  // const bankPageSlug = `/${slugify(bank)}`;
   return (
     <Layout>
       <React.Fragment>
-        <h1 className="title">{bank}</h1>
+        {/* <h1 className="title">{bank}</h1> */}
         <div className="columns is-multiline is-mobile is-centered">
-          {states.map(state => {
-            const statePageSlug = `${bankPageSlug}/${slugify(state)}`;
+          {cities.map(city => {
+            // const statePageSlug = `${bankPageSlug}/${slugify(state)}`;
             return (
               <div
                 className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
-                key={state}
+                key={city}
               >
-                <Link to={statePageSlug}>
-                  <div className="card">
-                    <div className="card-content">{state}</div>
-                  </div>
-                </Link>
+                {/* <Link to={statePageSlug}> */}
+                <div className="card">
+                  <div className="card-content">{city}</div>
+                </div>
+                {/* </Link> */}
               </div>
             );
           })}
@@ -52,10 +51,13 @@ const IFSC: React.FC<BankPageProps> = ({ data }) => {
 // TODO: There should be a better way to query this -- we need the bank based on slug and the list of states
 // Not sure if using distinct to get the single bank is a good idea.
 export const query = graphql`
-  query($bankSlug: String!) {
-    allIfscJson(filter: { fields: { bankSlug: { eq: $bankSlug } } }) {
-      states: distinct(field: STATE)
-      banks: distinct(field: BANK)
+  query($bankSlug: String!, $stateSlug: String!) {
+    allIfscJson(
+      filter: {
+        fields: { bankSlug: { eq: $bankSlug }, stateSlug: { eq: $stateSlug } }
+      }
+    ) {
+      cities: distinct(field: CITY)
     }
   }
 `;

@@ -1,4 +1,4 @@
-### Type definitions saved at 2020-01-23T06:04:32.911Z ###
+### Type definitions saved at 2020-01-23T10:13:05.934Z ###
 
 type IfscJson implements Node @derivedTypes @dontInfer {
   BANK: String
@@ -20,4 +20,5 @@ type IfscJson implements Node @derivedTypes @dontInfer {
 type IfscJsonFields {
   slug: String
   bankSlug: String
+  stateSlug: String
 }

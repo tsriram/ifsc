@@ -41,6 +41,12 @@ exports.onCreateNode = ({ node, actions }) => {
       name: `bankSlug`,
       value: bankSlug
     });
+
+    createNodeField({
+      node,
+      name: `stateSlug`,
+      value: stateSlug
+    });
   }
 };
 
@@ -62,13 +68,41 @@ exports.createPages = async ({ graphql, actions }) => {
     }
   `);
 
-  bankPages.data.allIfscJson.edges.forEach(({ node }) => {
+  bankPages.data.allIfscJson.edges.forEach(async ({ node }) => {
+    const bankSlug = node.fields.bankSlug;
     createPage({
-      path: node.fields.bankSlug,
+      path: bankSlug,
       component: path.resolve(`./src/templates/bank-page.tsx`),
       context: {
-        bankSlug: node.fields.bankSlug
+        bankSlug
       }
+    });
+
+    const bankStatePages = await graphql(`
+    query {
+      allIfscJson(filter: { fields: { bankSlug: { eq: "${bankSlug}" } } }) {
+        edges {
+          node {
+            fields {
+              stateSlug
+            }
+          }
+        }
+      }
+    }
+    `);
+
+    console.log("bankStatePages: ", bankStatePages);
+    bankStatePages.data.allIfscJson.edges.forEach(({ node }) => {
+      const bankStatePath = `${bankSlug}/${node.fields.stateSlug}`;
+      createPage({
+        path: bankStatePath,
+        component: path.resolve(`./src/templates/bank-state-page.tsx`),
+        context: {
+          bankSlug: bankSlug,
+          stateSlug: node.fields.stateSlug
+        }
+      });
     });
   });
 
