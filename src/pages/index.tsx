@@ -2,29 +2,22 @@ import Layout from "../components/layout";
 import { graphql } from "gatsby";
 import React from "react";
 
-interface Node {
-  readonly node: {
-    readonly BANK: string;
-  };
-}
-
 interface HomePageProps {
   readonly data: {
     readonly allIfscJson: {
-      readonly edges: ReadonlyArray<Node>;
+      readonly banks: ReadonlyArray<string>;
     };
   };
 }
 
 const HomePage: React.FC<HomePageProps> = ({ data }) => {
-  const { edges } = data.allIfscJson;
+  const { banks } = data.allIfscJson;
   return (
     <Layout>
       <React.Fragment>
         <h1 className="title">Banks</h1>
         <div className="columns is-multiline is-mobile is-centered">
-          {edges.map(edge => {
-            const { BANK: bank } = edge.node;
+          {banks.map(bank => {
             return (
               <div
                 className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
@@ -45,11 +38,7 @@ const HomePage: React.FC<HomePageProps> = ({ data }) => {
 export const query = graphql`
   query {
     allIfscJson {
-      edges {
-        node {
-          BANK
-        }
-      }
+      banks: distinct(field: BANK)
     }
   }
 `;
