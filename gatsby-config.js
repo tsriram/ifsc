@@ -5,6 +5,9 @@
  */
 
 module.exports = {
+  siteMetadata: {
+    siteUrl: `https://ifsc.netlify.com`
+  },
   plugins: [
     `gatsby-plugin-typescript`,
     {
@@ -39,6 +42,7 @@ module.exports = {
       options: {
         develop: false
       }
-    }
+    },
+    `gatsby-plugin-sitemap`
   ]
 };

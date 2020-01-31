@@ -20,6 +20,7 @@
     "gatsby-plugin-purgecss": "^4.0.1",
     "gatsby-plugin-sass": "^2.1.26",
     "gatsby-plugin-schema-snapshot": "^1.0.0",
+    "gatsby-plugin-sitemap": "^2.2.26",
     "gatsby-plugin-typescript": "^2.1.23",
     "gatsby-source-filesystem": "^2.1.43",
     "gatsby-transformer-json": "^2.2.25",
