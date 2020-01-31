@@ -3,14 +3,10 @@ import { graphql, Link } from "gatsby";
 import { slugify } from "../util";
 import React from "react";
 
-interface Node {
-  readonly node: {
-    readonly BANK: string;
-    readonly STATE: string;
-  };
-}
-
 interface BankPageProps {
+  readonly pageContext: {
+    readonly bankSlug: string;
+  };
   readonly data: {
     readonly allIfscJson: {
       readonly states: ReadonlyArray<string>;
@@ -19,17 +15,17 @@ interface BankPageProps {
   };
 }
 
-const IFSC: React.FC<BankPageProps> = ({ data }) => {
+const BankPage: React.FC<BankPageProps> = ({ data, pageContext }) => {
   const { states, banks } = data.allIfscJson;
+  const { bankSlug } = pageContext;
   const bank = banks[0];
-  const bankPageSlug = `/${slugify(bank)}`;
   return (
     <Layout>
       <React.Fragment>
         <h1 className="title">{bank}</h1>
         <div className="columns is-multiline is-mobile is-centered">
           {states.map(state => {
-            const statePageSlug = `${bankPageSlug}/${slugify(state)}`;
+            const statePageSlug = `${bankSlug}/${slugify(state)}`;
             return (
               <div
                 className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
@@ -60,4 +56,4 @@ export const query = graphql`
   }
 `;
 
-export default IFSC;
+export default BankPage;
