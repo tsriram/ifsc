@@ -60,6 +60,10 @@ exports.onCreateNode = ({ node, actions }) => {
   }
 };
 
+// This will create pages that enable navigating from home page (with list of banks)
+//  --> bank-state page (list of states that the bank is in) --> bank-state-city page
+// (list of cities in the state where the bank is in) --> bank-state-city-branch (with list of branches)
+// --> individual branch page (which has the acutal IFSC)
 exports.createPages = async ({ graphql, actions }) => {
   const { createPage } = actions;
   const bankPages = {};
