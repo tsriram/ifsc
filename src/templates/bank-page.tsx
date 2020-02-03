@@ -22,8 +22,22 @@ const BankPage: React.FC<BankPageProps> = ({ data, pageContext }) => {
   return (
     <Layout>
       <React.Fragment>
-        <h1 className="title">{bank}</h1>
-        <div className="columns is-multiline is-mobile is-centered">
+        <nav
+          className="breadcrumb has-arrow-separator"
+          aria-label="breadcrumbs"
+        >
+          <ul>
+            <li>
+              <Link to="/">All banks</Link>
+            </li>
+            <li className="is-active">
+              <Link to="#" aria-current="page">
+                {bank}
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        <div className="columns is-multiline is-mobile">
           {states.map(state => {
             const statePageSlug = `${bankSlug}/${slugify(state)}`;
             return (

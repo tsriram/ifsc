@@ -17,7 +17,7 @@ const HomePage: React.FC<HomePageProps> = ({ data }) => {
     <Layout>
       <React.Fragment>
         <h1 className="title">Banks</h1>
-        <div className="columns is-multiline is-mobile is-centered">
+        <div className="columns is-multiline is-mobile">
           {banks.map(bank => {
             const bankPageSlug = `/${slugify(bank)}`;
             return (
