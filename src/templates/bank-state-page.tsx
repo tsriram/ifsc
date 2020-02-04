@@ -1,3 +1,4 @@
+import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
 import Layout from "../components/layout";
 import { graphql, Link } from "gatsby";
 import { slugify } from "../util";
@@ -12,20 +13,28 @@ interface BankStatePageProps {
     readonly allIfscJson: {
       readonly states: ReadonlyArray<string>;
       readonly cities: ReadonlyArray<string>;
+      readonly banks: ReadonlyArray<string>;
     };
   };
 }
 
 const BankStatePage: React.FC<BankStatePageProps> = ({ data, pageContext }) => {
-  const { cities, states } = data.allIfscJson;
+  const { cities, states, banks } = data.allIfscJson;
   const { bankSlug, stateSlug } = pageContext;
+  const bank = banks[0];
   const state = states[0];
 
   return (
     <Layout>
       <React.Fragment>
-        <h1 className="title">{state}</h1>
-        <div className="columns is-multiline is-mobile is-centered">
+        <Breadcrumb>
+          <BreadcrumbLink to="/">All banks</BreadcrumbLink>
+          <BreadcrumbLink to={`/${bankSlug}`}>{bank}</BreadcrumbLink>
+          <BreadcrumbLink to="#" current>
+            {state}
+          </BreadcrumbLink>
+        </Breadcrumb>
+        <div className="columns is-multiline is-mobile">
           {cities.map(city => {
             const citySlug = slugify(city);
             const bankStateCityPageSlug = `/${bankSlug}/${stateSlug}/${citySlug}`;
@@ -56,6 +65,7 @@ export const query = graphql`
       }
     ) {
       states: distinct(field: STATE)
+      banks: distinct(field: BANK)
       cities: distinct(field: CITY)
     }
   }
