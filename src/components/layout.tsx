@@ -11,7 +11,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div>
       <nav
-        className="navbar is-fixed-top is-primary"
+        className="navbar is-primary"
         role="navigation"
         aria-label="main navigation"
       >

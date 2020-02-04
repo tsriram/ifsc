@@ -7,9 +7,16 @@ interface BreadcrumbProps {
 
 const Breadcrumb: React.FC<BreadcrumbProps> = ({ children }) => {
   return (
-    <nav className="breadcrumb has-arrow-separator" aria-label="breadcrumbs">
-      <ul>{children}</ul>
-    </nav>
+    <div className="columns">
+      <div className="column">
+        <nav
+          className="breadcrumb has-arrow-separator"
+          aria-label="breadcrumbs"
+        >
+          <ul>{children}</ul>
+        </nav>
+      </div>
+    </div>
   );
 };
 
@@ -24,11 +31,18 @@ const BreadcrumbLink: React.FC<BreadcrumbLinkProps> = ({
   current = false,
   children
 }) => {
+  if (current) {
+    return (
+      <li className="is-active">
+        <a href="#" aria-current="page">
+          {children}
+        </a>
+      </li>
+    );
+  }
   return (
-    <li className={current ? "is-active" : ""}>
-      <Link to="#" aria-current={current ? "page" : undefined}>
-        {children}
-      </Link>
+    <li>
+      <Link to={to}>{children}</Link>
     </li>
   );
 };

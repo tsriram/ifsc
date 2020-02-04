@@ -2,6 +2,7 @@ import Layout from "../components/layout";
 import { graphql, Link } from "gatsby";
 import { slugify } from "../util";
 import React from "react";
+import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
 
 interface BankPageProps {
   readonly pageContext: {
@@ -22,24 +23,15 @@ const BankPage: React.FC<BankPageProps> = ({ data, pageContext }) => {
   return (
     <Layout>
       <React.Fragment>
-        <nav
-          className="breadcrumb has-arrow-separator"
-          aria-label="breadcrumbs"
-        >
-          <ul>
-            <li>
-              <Link to="/">All banks</Link>
-            </li>
-            <li className="is-active">
-              <Link to="#" aria-current="page">
-                {bank}
-              </Link>
-            </li>
-          </ul>
-        </nav>
+        <Breadcrumb>
+          <BreadcrumbLink to="/">All banks</BreadcrumbLink>
+          <BreadcrumbLink to="#" current>
+            {bank}
+          </BreadcrumbLink>
+        </Breadcrumb>
         <div className="columns is-multiline is-mobile">
           {states.map(state => {
-            const statePageSlug = `${bankSlug}/${slugify(state)}`;
+            const statePageSlug = `/${bankSlug}/${slugify(state)}`;
             return (
               <div
                 className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
