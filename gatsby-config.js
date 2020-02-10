@@ -23,7 +23,9 @@ module.exports = {
     {
       resolve: `gatsby-transformer-json`,
       options: {
-        typeName: "IfscJson"
+        typeName: ({ object }) => {
+          return object.type || "IfscJson";
+        }
       }
     },
     `gatsby-plugin-sass`,

@@ -1,6 +1,48 @@
-### Type definitions saved at 2020-01-31T09:48:40.647Z ###
+### Type definitions saved at 2020-02-10T06:10:20.654Z ###
 
-type IfscJson implements Node @derivedTypes @dontInfer {
+type BankStateCityBranchesJson implements Node @derivedTypes @dontInfer {
+  bank: String
+  bankSlug: String
+  state: String
+  stateSlug: String
+  city: String
+  citySlug: String
+  branches: [BankStateCityBranchesJsonBranches]
+  type: String
+}
+
+type BankStateCityBranchesJsonBranches {
+  label: String
+  slug: String
+}
+
+type BankStateCitiesJson implements Node @derivedTypes @dontInfer {
+  bank: String
+  bankSlug: String
+  state: String
+  stateSlug: String
+  cities: [BankStateCitiesJsonCities]
+  type: String
+}
+
+type BankStateCitiesJsonCities {
+  label: String
+  slug: String
+}
+
+type BankStatesJson implements Node @derivedTypes @dontInfer {
+  bank: String
+  bankSlug: String
+  states: [BankStatesJsonStates]
+  type: String
+}
+
+type BankStatesJsonStates {
+  label: String
+  slug: String
+}
+
+type IfscJson implements Node @dontInfer {
   BANK: String
   IFSC: String
   BRANCH: String
@@ -14,12 +56,9 @@ type IfscJson implements Node @derivedTypes @dontInfer {
   CITY: String
   NEFT: Boolean
   MICR: String
-  fields: IfscJsonFields
-}
-
-type IfscJsonFields {
   bankSlug: String
   stateSlug: String
   citySlug: String
-  slug: String
+  branchSlug: String
+  type: String
 }

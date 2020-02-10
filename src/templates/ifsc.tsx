@@ -13,11 +13,9 @@ interface IFSCProps {
   readonly ADDRESS: string;
   readonly CONTACT: string;
   readonly MICR: string;
-  readonly fields: {
-    readonly bankSlug: string;
-    readonly stateSlug: string;
-    readonly citySlug: string;
-  };
+  readonly bankSlug: string;
+  readonly stateSlug: string;
+  readonly citySlug: string;
 }
 
 interface Node {
@@ -45,9 +43,11 @@ const IFSC: React.FC<IFSCPageProps> = ({ data }) => {
     ADDRESS: address,
     CONTACT: contact,
     MICR: micr,
-    fields
+    bankSlug,
+    stateSlug,
+    citySlug
   } = node;
-  const { bankSlug, stateSlug, citySlug } = fields;
+
   return (
     <Layout>
       <React.Fragment>
@@ -130,11 +130,9 @@ export const query = graphql`
           ADDRESS
           CONTACT
           MICR
-          fields {
-            bankSlug
-            stateSlug
-            citySlug
-          }
+          bankSlug
+          stateSlug
+          citySlug
         }
       }
     }

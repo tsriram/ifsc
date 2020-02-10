@@ -1,25 +1,25 @@
+import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
+import LabelSlug from "../interfaces/LabelSlug";
 import Layout from "../components/layout";
 import { graphql, Link } from "gatsby";
-import { slugify } from "../util";
 import React from "react";
-import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
+
+interface Node {
+  readonly bank: string;
+  readonly bankSlug: string;
+  readonly states: ReadonlyArray<LabelSlug>;
+}
 
 interface BankPageProps {
-  readonly pageContext: {
-    readonly bankSlug: string;
-  };
   readonly data: {
-    readonly allIfscJson: {
-      readonly states: ReadonlyArray<string>;
-      readonly banks: ReadonlyArray<string>;
+    readonly allBankStatesJson: {
+      readonly nodes: ReadonlyArray<Node>;
     };
   };
 }
 
-const BankPage: React.FC<BankPageProps> = ({ data, pageContext }) => {
-  const { states, banks } = data.allIfscJson;
-  const { bankSlug } = pageContext;
-  const bank = banks[0];
+const BankPage: React.FC<BankPageProps> = ({ data }) => {
+  const { states, bank, bankSlug } = data.allBankStatesJson.nodes[0];
   return (
     <Layout>
       <React.Fragment>
@@ -31,15 +31,15 @@ const BankPage: React.FC<BankPageProps> = ({ data, pageContext }) => {
         </Breadcrumb>
         <div className="columns is-multiline is-mobile">
           {states.map(state => {
-            const statePageSlug = `/${bankSlug}/${slugify(state)}`;
+            const statePageSlug = `/${bankSlug}/${state.slug}`;
             return (
               <div
                 className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
-                key={state}
+                key={state.label}
               >
                 <Link to={statePageSlug}>
                   <div className="card">
-                    <div className="card-content">{state}</div>
+                    <div className="card-content">{state.label}</div>
                   </div>
                 </Link>
               </div>
@@ -54,10 +54,16 @@ const BankPage: React.FC<BankPageProps> = ({ data, pageContext }) => {
 // TODO: There should be a better way to query this -- we need the bank based on slug and the list of states
 // Not sure if using distinct to get the single bank is a good idea.
 export const query = graphql`
-  query($bankSlug: String!) {
-    allIfscJson(filter: { fields: { bankSlug: { eq: $bankSlug } } }) {
-      states: distinct(field: STATE)
-      banks: distinct(field: BANK)
+  query($id: String!) {
+    allBankStatesJson(filter: { id: { eq: $id } }) {
+      nodes {
+        bank
+        bankSlug
+        states {
+          label
+          slug
+        }
+      }
     }
   }
 `;
