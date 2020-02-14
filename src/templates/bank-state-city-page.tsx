@@ -1,34 +1,37 @@
 import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
+import LabelSlug from "../interfaces/LabelSlug";
 import Layout from "../components/layout";
 import { graphql, Link } from "gatsby";
-import { slugify } from "../util";
 import React from "react";
 
+interface Node {
+  readonly bank: string;
+  readonly bankSlug: string;
+  readonly state: string;
+  readonly stateSlug: string;
+  readonly city: string;
+  readonly citySlug: string;
+  readonly branches: ReadonlyArray<LabelSlug>;
+}
+
 interface BankStateCityPageProps {
-  readonly pageContext: {
-    readonly bankSlug: string;
-    readonly stateSlug: string;
-    readonly citySlug: string;
-  };
   readonly data: {
-    readonly allIfscJson: {
-      readonly states: ReadonlyArray<string>;
-      readonly cities: ReadonlyArray<string>;
-      readonly banks: ReadonlyArray<string>;
-      readonly branches: ReadonlyArray<string>;
+    readonly allBankStateCityBranchesJson: {
+      readonly nodes: ReadonlyArray<Node>;
     };
   };
 }
 
-const BankStateCityPage: React.FC<BankStateCityPageProps> = ({
-  data,
-  pageContext
-}) => {
-  const { branches, banks, states, cities } = data.allIfscJson;
-  const { bankSlug, stateSlug, citySlug } = pageContext;
-  const bank = banks[0];
-  const state = states[0];
-  const city = cities[0];
+const BankStateCityPage: React.FC<BankStateCityPageProps> = ({ data }) => {
+  const {
+    branches,
+    bank,
+    bankSlug,
+    state,
+    stateSlug,
+    city,
+    citySlug
+  } = data.allBankStateCityBranchesJson.nodes[0];
 
   return (
     <Layout>
@@ -45,16 +48,15 @@ const BankStateCityPage: React.FC<BankStateCityPageProps> = ({
         </Breadcrumb>
         <div className="columns is-multiline is-mobile">
           {branches.map(branch => {
-            const branchSlug = `${slugify(branch)}-branch`;
-            const ifscPageSlug = `/${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}`;
+            const ifscPageSlug = `/${bankSlug}/${stateSlug}/${citySlug}/${branch.slug}-branch`;
             return (
               <div
                 className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
-                key={branch}
+                key={branch.label}
               >
                 <Link to={ifscPageSlug}>
                   <div className="card">
-                    <div className="card-content">{branch}</div>
+                    <div className="card-content">{branch.label}</div>
                   </div>
                 </Link>
               </div>
@@ -67,20 +69,20 @@ const BankStateCityPage: React.FC<BankStateCityPageProps> = ({
 };
 
 export const query = graphql`
-  query($bankSlug: String!, $stateSlug: String!, $citySlug: String!) {
-    allIfscJson(
-      filter: {
-        fields: {
-          bankSlug: { eq: $bankSlug }
-          stateSlug: { eq: $stateSlug }
-          citySlug: { eq: $citySlug }
+  query($id: String!) {
+    allBankStateCityBranchesJson(filter: { id: { eq: $id } }) {
+      nodes {
+        bank
+        bankSlug
+        state
+        stateSlug
+        city
+        citySlug
+        branches {
+          label
+          slug
         }
       }
-    ) {
-      states: distinct(field: STATE)
-      banks: distinct(field: BANK)
-      cities: distinct(field: CITY)
-      branches: distinct(field: BRANCH)
     }
   }
 `;
