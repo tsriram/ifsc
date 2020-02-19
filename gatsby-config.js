@@ -6,7 +6,7 @@
 
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://ifsc.netlify.com`
+    siteUrl: `https://indian-financial-system-code.web.app`
   },
   plugins: [
     `gatsby-plugin-typescript`,
