@@ -9,6 +9,7 @@ module.exports = {
     siteUrl: `https://indian-financial-system-code.web.app`
   },
   plugins: [
+    `gatsby-plugin-react-helmet`,
     `gatsby-plugin-typescript`,
     {
       resolve: `gatsby-source-filesystem`,
