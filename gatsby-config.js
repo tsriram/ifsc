@@ -6,7 +6,7 @@
 
 module.exports = {
   siteMetadata: {
-    siteUrl: `https://indian-financial-system-code.web.app`
+    siteUrl: `https://ifsc.xyz`
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
