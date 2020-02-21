@@ -46,6 +46,13 @@ module.exports = {
         develop: false
       }
     },
-    `gatsby-plugin-sitemap`
+    `gatsby-plugin-sitemap`,
+    {
+      resolve: `gatsby-plugin-google-analytics`,
+      options: {
+        trackingId: `UA-82144226-6`,
+        respectDNT: true
+      }
+    }
   ]
 };
