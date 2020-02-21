@@ -1,5 +1,6 @@
 import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
 import Layout from "../components/layout";
+import SEO from "../components/SEO";
 import { graphql } from "gatsby";
 import React from "react";
 
@@ -30,6 +31,26 @@ interface IFSCPageProps {
   };
 }
 
+const getSEOTitle = (
+  bank: string,
+  state: string,
+  city: string,
+  branch: string,
+  ifsc: string
+) => {
+  return `${bank} ${branch} branch, ${city}, ${state} - ${ifsc} - IFSC, MICR codes`;
+};
+
+const getSEODescription = (
+  bank: string,
+  state: string,
+  city: string,
+  branch: string,
+  ifsc: string
+) => {
+  return `${bank} ${branch} branch, ${city}, ${state} - ${ifsc} - IFSC, MICR codes, branch address and contact number`;
+};
+
 const IFSC: React.FC<IFSCPageProps> = ({ data }) => {
   const { allIfscJson } = data;
   const node = allIfscJson.edges[0].node;
@@ -51,6 +72,10 @@ const IFSC: React.FC<IFSCPageProps> = ({ data }) => {
   return (
     <Layout>
       <React.Fragment>
+        <SEO
+          title={getSEOTitle(bank, state, city, branch, ifsc)}
+          description={getSEODescription(bank, state, city, branch, ifsc)}
+        />
         <Breadcrumb>
           <BreadcrumbLink to="/">All banks</BreadcrumbLink>
           <BreadcrumbLink to={`/${bankSlug}`}>{bank}</BreadcrumbLink>

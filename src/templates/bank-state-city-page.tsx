@@ -2,6 +2,7 @@ import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
 import LabelSlug from "../interfaces/LabelSlug";
 import Layout from "../components/layout";
 import { graphql, Link } from "gatsby";
+import SEO from "../components/SEO";
 import React from "react";
 
 interface Node {
@@ -22,6 +23,14 @@ interface BankStateCityPageProps {
   };
 }
 
+const getSEOTitle = (bank: string, state: string, city: string) => {
+  return `All ${bank} branches in ${city}, ${state} - IFSC, MICR codes`;
+};
+
+const getSEODescription = (bank: string, state: string, city: string) => {
+  return `Find ${bank} IFSC, MICR code, branch address and contact number in ${city}, ${state}`;
+};
+
 const BankStateCityPage: React.FC<BankStateCityPageProps> = ({ data }) => {
   const {
     branches,
@@ -36,6 +45,10 @@ const BankStateCityPage: React.FC<BankStateCityPageProps> = ({ data }) => {
   return (
     <Layout>
       <React.Fragment>
+        <SEO
+          title={getSEOTitle(bank, state, city)}
+          description={getSEODescription(bank, state, city)}
+        />
         <Breadcrumb>
           <BreadcrumbLink to="/">All banks</BreadcrumbLink>
           <BreadcrumbLink to={`${bankSlug}`}>{bank}</BreadcrumbLink>
