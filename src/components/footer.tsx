@@ -8,10 +8,11 @@ const Footer: React.FC<{}> = props => {
           All bank details like branch address, contact number are from open
           data and may not be up to date.
         </p>
+        <p>
+          Made with ❤ and ☕️ by{" "}
+          <a href="https://twitter.com/tsriram">Sriram</a>
+        </p>
       </div>
-      <p>
-        Made with ❤ and ☕️ by <a href="https://twitter.com/tsriram">Sriram</a>
-      </p>
     </footer>
   );
 };

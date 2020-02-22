@@ -1,4 +1,4 @@
-@import "./colors";
+@import "./variables";
 @import "./global";
 
 @import "~bulma/bulma";
@@ -20,4 +20,18 @@ a {
     overflow: hidden;
     text-overflow: ellipsis;
   }
+}
+
+.site {
+  display: flex;
+  min-height: 100vh;
+  flex-direction: column;
+}
+
+.site-content {
+  flex: 1;
+}
+
+.footer {
+  margin-top: 2rem;
 }
