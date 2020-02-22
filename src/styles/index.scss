@@ -1,14 +1,7 @@
 @import "./colors";
 @import "./global";
 
-@import "bulma/sass/base/minireset";
-@import "bulma/sass/utilities/_all";
-@import "bulma/sass/grid/columns";
-@import "bulma/sass/elements/_all";
-@import "bulma/sass/layout/_all";
-@import "bulma/sass/components/navbar";
-@import "bulma/sass/components/card";
-@import "bulma/sass/components/breadcrumb";
+@import "~bulma/bulma";
 
 // custom styles
 
