@@ -40,6 +40,7 @@ const BankPage: React.FC<BankPageProps> = ({ data }) => {
             {bank}
           </BreadcrumbLink>
         </Breadcrumb>
+        <h1 className="title">Select a state:</h1>
         <div className="columns is-multiline is-mobile">
           {states.map(state => {
             const statePageSlug = `/${bankSlug}/${state.slug}`;

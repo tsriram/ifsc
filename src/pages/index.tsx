@@ -27,7 +27,7 @@ const HomePage: React.FC<HomePageProps> = ({ data }) => {
     <Layout>
       <React.Fragment>
         <SEO title={getSEOTitle()} description={getSEODescription()} />
-        <h1 className="title">Banks</h1>
+        <h1 className="title">Select a bank:</h1>
         <div className="columns is-multiline is-mobile">
           {banks.map(bank => {
             const bankPageSlug = `/${slugify(bank)}`;
