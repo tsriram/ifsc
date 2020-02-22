@@ -1,4 +1,6 @@
+import { Helmet } from "react-helmet";
 import { Link } from "gatsby";
+import Footer from "./footer";
 import React from "react";
 
 import "../styles/index.scss";
@@ -10,6 +12,9 @@ interface LayoutProps {
 const Layout: React.FC<LayoutProps> = ({ children }) => {
   return (
     <div>
+      <Helmet>
+        <meta name="viewport" content="width=device-width, initial-scale=1" />
+      </Helmet>
       <nav
         className="navbar is-primary"
         role="navigation"
@@ -26,6 +31,7 @@ const Layout: React.FC<LayoutProps> = ({ children }) => {
           <div className="container">{children}</div>
         </section>
       </main>
+      <Footer />
     </div>
   );
 };
