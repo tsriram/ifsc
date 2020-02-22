@@ -5,8 +5,8 @@ const Footer: React.FC<{}> = props => {
     <footer className="footer">
       <div className="content has-text-centered">
         <p>
-          All bank details like branch address, contact number are from open
-          data and may not be up to date.
+          <strong>Disclaimer:</strong> All bank details like branch address,
+          contact number are from open data and may not be up to date.
         </p>
         <p>
           Made with ❤ and ☕️ by{" "}
