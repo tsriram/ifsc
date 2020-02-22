@@ -1,13 +1,12 @@
-name: CI
+name: Build and deploy to Firebase
 
 on:
   push:
-    branches: 
+    branches:
       - master
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
