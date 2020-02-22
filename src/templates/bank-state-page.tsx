@@ -1,8 +1,9 @@
 import { Breadcrumb, BreadcrumbLink } from "../components/breadcrumb";
 import LabelSlug from "../interfaces/LabelSlug";
+import LinkCard from "../components/link-card";
 import Layout from "../components/layout";
-import { graphql, Link } from "gatsby";
 import SEO from "../components/SEO";
+import { graphql } from "gatsby";
 import React from "react";
 
 interface Node {
@@ -56,16 +57,9 @@ const BankStatePage: React.FC<BankStatePageProps> = ({ data }) => {
           {cities.map(city => {
             const bankStateCityPageSlug = `/${bankSlug}/${stateSlug}/${city.slug}`;
             return (
-              <div
-                className="column is-three-quarters-mobile is-two-thirds-tablet is-half-desktop is-one-third-widescreen is-one-quarter-fullhd"
-                key={city.label}
-              >
-                <Link to={bankStateCityPageSlug}>
-                  <div className="card">
-                    <div className="card-content">{city.label}</div>
-                  </div>
-                </Link>
-              </div>
+              <LinkCard linkTo={bankStateCityPageSlug} key={city.label}>
+                {city.label}
+              </LinkCard>
             );
           })}
         </div>

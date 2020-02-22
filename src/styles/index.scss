@@ -8,3 +8,16 @@
 a {
   text-decoration: none;
 }
+
+.link-card {
+  display: flex;
+  align-items: center;
+
+  .card-content {
+    height: 100%;
+    flex: 1;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+}
