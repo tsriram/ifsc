@@ -6,7 +6,7 @@ import React from "react";
 import "../styles/index.scss";
 
 interface LayoutProps {
-  readonly children: JSX.Element;
+  readonly children: JSX.Element | JSX.Element[];
 }
 
 const Layout: React.FC<LayoutProps> = ({ children }) => {
