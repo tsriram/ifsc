@@ -26,7 +26,7 @@ exports.createPages = async ({ graphql, actions }) => {
   allIfsc.data.allIfscJson.edges.forEach(({ node }) => {
     const { bankSlug, stateSlug, citySlug, branchSlug } = node;
     if (bankSlug && stateSlug && citySlug && branchSlug) {
-      const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch`;
+      const slug = `${bankSlug}/${stateSlug}/${citySlug}/${branchSlug}-branch/`;
       createPage({
         path: slug,
         component: path.resolve(`./src/templates/ifsc.tsx`),
@@ -53,7 +53,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   allBankStates.data.allBankStatesJson.edges.forEach(({ node }) => {
     createPage({
-      path: node.bankSlug,
+      path: `${node.bankSlug}/`,
       component: path.resolve(`./src/templates/bank-page.tsx`),
       context: {
         id: node.id
@@ -78,7 +78,7 @@ exports.createPages = async ({ graphql, actions }) => {
 
   allBankStateCities.data.allBankStateCitiesJson.edges.forEach(({ node }) => {
     createPage({
-      path: `${node.bankSlug}/${node.stateSlug}`,
+      path: `${node.bankSlug}/${node.stateSlug}/`,
       component: path.resolve(`./src/templates/bank-state-page.tsx`),
       context: {
         id: node.id
@@ -105,7 +105,7 @@ exports.createPages = async ({ graphql, actions }) => {
   allBankStateCityBranches.data.allBankStateCityBranchesJson.edges.forEach(
     ({ node }) => {
       createPage({
-        path: `${node.bankSlug}/${node.stateSlug}/${node.citySlug}`,
+        path: `${node.bankSlug}/${node.stateSlug}/${node.citySlug}/`,
         component: path.resolve(`./src/templates/bank-state-city-page.tsx`),
         context: {
           id: node.id
