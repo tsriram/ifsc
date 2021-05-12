@@ -27,7 +27,7 @@
     "gatsby-plugin-typescript": "^2.1.23",
     "gatsby-source-filesystem": "^2.1.43",
     "gatsby-transformer-json": "^2.2.25",
-    "lodash": "^4.17.15",
+    "lodash": "^4.17.21",
     "mkdirp": "^0.5.1",
     "node-sass": "^4.13.0",
     "react": "^16.12.0",
